@@ -4,10 +4,14 @@
   "description": "La API de mi página web <alexisklisch.com>",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "migrations:generate": "sequelize-cli migration:generate --name",
+    "migrations:run": "sequelize-cli db:migrate",
+    "migrations:revert": "sequelize-cli db_migrate:undo",
+    "migrations:delete": "sequelize-cli db_migrate:undo:all"
   },
   "keywords": [
-    "api",
+    "api rest",
     "backend",
     "Express"
   ],
