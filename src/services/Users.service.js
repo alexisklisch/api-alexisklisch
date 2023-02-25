@@ -1,3 +1,4 @@
+const boom = require('@hapi/boom')
 const { models } = require('../libs/sequelize.js')
 
 class UsersService {
@@ -13,13 +14,16 @@ class UsersService {
 
   // Get user by PK
   async getUserByPk (id) {
-    return await models.Users.findByPk(id)
+    const user = await models.Users.findByPk(id)
+    if (user === null) throw boom.notFound('El usuario no existe')
+    return user
   }
 
   // Update user
   async updateUser (id, data) {
-    const currentUser = await this.getUserByPk(id)
-    currentUser.update(data)
+    const currentUser = await models.Users.findByPk(id)
+    if (currentUser === null) throw boom.notFound('El usuario no existe')
+    return await currentUser.update(data)
   }
 
   // Delete user

@@ -4,9 +4,8 @@ const integer = Joi.number().integer()
 const string = length => Joi.string().max(length)
 
 const createUserSchema = Joi.object({
-  id: integer.required(),
   username: string(16).required(),
-  password: string(256),
+  password: string(256).required(),
   email: string(64).email().required()
 })
 
