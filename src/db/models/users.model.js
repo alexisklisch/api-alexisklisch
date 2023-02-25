@@ -25,6 +25,13 @@ const usersSchema = {
 }
 
 class Users extends Model {
+  static associate (models) {
+    this.hasMany(models.News, {
+      as: 'news',
+      foreignKey: 'usersId'
+    })
+  }
+
   static config (sequelize) {
     return {
       sequelize,

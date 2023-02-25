@@ -39,6 +39,10 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false
       },
+      body: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       createdAt: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -47,6 +51,17 @@ module.exports = {
       },
       link: {
         type: DataTypes.STRING
+      },
+      userId: {
+        field: 'user_id',
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: {
+          model: USERS_TABLE,
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       }
     })
   },

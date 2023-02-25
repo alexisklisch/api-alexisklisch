@@ -1,4 +1,5 @@
 const { DataTypes, Model } = require('sequelize')
+const { USERS_TABLE } = require('./users.model')
 
 const NEWS_TABLE = 'news'
 
@@ -13,6 +14,10 @@ const newsSchema = {
     type: DataTypes.STRING,
     allowNull: false
   },
+  body: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   createdAt: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
@@ -21,10 +26,25 @@ const newsSchema = {
   },
   link: {
     type: DataTypes.STRING
+  },
+  usersId: {
+    field: 'user_id',
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    references: {
+      model: USERS_TABLE,
+      key: 'id'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE'
   }
 }
 
 class News extends Model {
+  static associate (models) {
+    this.belongsTo(models.Users, { as: 'users' })
+  }
+
   static config (sequelize) {
     return {
       sequelize,
