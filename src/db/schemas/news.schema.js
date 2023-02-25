@@ -4,11 +4,9 @@ const integer = Joi.number().integer()
 const string = length => Joi.string().max(length)
 
 const createNewSchema = Joi.object({
-  id: integer.required(),
-  username: string(64).required(),
+  title: string(64).required(),
   body: string(128),
-  createdAt: Joi.date().required(),
-  link: string(64).hostname().default('https://google.com'),
+  link: string(64).uri(),
   usersId: integer.required()
 })
 
@@ -19,7 +17,7 @@ const getNewByPKSchema = Joi.object({
 const updateNewSchema = Joi.object({
   username: string(64),
   body: string(128),
-  link: string(64).hostname().default('https://google.com'),
+  link: string(64).hostname(),
   usersId: integer.required()
 })
 

@@ -4,7 +4,9 @@ const { models } = require('../libs/sequelize.js')
 class UsersService {
   // Create user
   async createUser (user) {
-    return await models.Users.create(user)
+    const newUser = await models.Users.create(user)
+    delete newUser.dataValues.password
+    return newUser
   }
 
   // Get all users
@@ -14,7 +16,16 @@ class UsersService {
 
   // Get user by PK
   async getUserByPk (id) {
-    const user = await models.Users.findByPk(id)
+    const user = await models.Users.findByPk(id, { include: 'news' })
+    if (user === null) throw boom.notFound('El usuario no existe')
+    return user
+  }
+
+  // Get user by email
+  async getUserByEmail (email) {
+    const user = await models.Users.findOne({
+      where: { email }
+    })
     if (user === null) throw boom.notFound('El usuario no existe')
     return user
   }

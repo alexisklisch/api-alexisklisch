@@ -50,7 +50,8 @@ module.exports = {
         field: 'created_at'
       },
       link: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        defaultValue: 'https://alexisklisch.com'
       },
       userId: {
         field: 'user_id',

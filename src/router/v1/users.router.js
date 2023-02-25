@@ -12,7 +12,6 @@ router.post('/',
     try {
       const { body } = req
       const rta = await usersService.createUser(body)
-      console.log(rta)
       res.json(rta)
     } catch (err) {
       next()

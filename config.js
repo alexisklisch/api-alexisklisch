@@ -5,7 +5,8 @@ const config = {
   dbPassword: process.env.DB_PASSWORD,
   dbHost: process.env.DB_HOST,
   dbUser: process.env.DB_USER,
-  dbPort: process.env.PORT
+  dbPort: process.env.PORT,
+  superSecret: process.env.SUPER_SECRET
 }
 
 module.exports = { config }

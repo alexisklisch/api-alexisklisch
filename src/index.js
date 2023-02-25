@@ -6,6 +6,8 @@ const app = express()
 app.use(express.json())
 routerApi(app)
 
+require('./utils/auth')
+
 app.use(logErrors)
 app.use(boomErrorHandler)
 app.use(errorHandler)

@@ -25,7 +25,8 @@ const newsSchema = {
     field: 'created_at'
   },
   link: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    defaultValue: 'https://alexisklisch.com'
   },
   usersId: {
     field: 'user_id',
