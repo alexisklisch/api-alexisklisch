@@ -25,6 +25,10 @@ module.exports = {
       email: {
         type: DataTypes.STRING,
         unique: true
+      },
+      role: {
+        type: DataTypes.STRING,
+        defaultValue: 'visitor'
       }
     })
 
