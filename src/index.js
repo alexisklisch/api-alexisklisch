@@ -5,7 +5,7 @@ const { routerApi } = require('./router/index.router.js')
 
 const app = express()
 
-const whitelist = ['http://localhost:3000', 'https://alexisklisch.com', 'https://www.alexisklisch.com']
+/* const whitelist = ['http://localhost:3000', 'https://alexisklisch.com', 'https://www.alexisklisch.com']
 const options = {
   origin: (origin, callback) => {
     if (whitelist.includes(origin) || !origin) {
@@ -15,7 +15,8 @@ const options = {
     }
   }
 }
-app.use(cors(options))
+app.use(cors(options)) */
+app.use(cors())
 app.use(express.json())
 routerApi(app)
 
