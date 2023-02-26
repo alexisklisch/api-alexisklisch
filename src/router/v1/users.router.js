@@ -19,6 +19,7 @@ router.post('/',
   })
 
 router.get('/', async (req, res) => {
+  console.log(req.cookies)
   const rta = await usersService.getUsers()
   res.json(rta)
 })
