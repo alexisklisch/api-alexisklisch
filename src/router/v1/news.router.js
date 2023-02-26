@@ -1,5 +1,7 @@
 const { Router } = require('express')
+const passport = require('passport')
 const { createNewSchema } = require('../../db/schemas/news.schema.js')
+const { checkRoles } = require('../../middlewares/auth.handler.js')
 const validatorHandler = require('../../middlewares/validator.handler.js')
 const { NewsService } = require('../../services/News.service.js')
 const newsService = new NewsService()
@@ -7,6 +9,8 @@ const router = Router()
 
 // Create new
 router.post('/',
+  passport.authenticate('jwt', { session: false }),
+  checkRoles(['admin']),
   validatorHandler(createNewSchema, 'body'),
   async (req, res, next) => {
     try {
