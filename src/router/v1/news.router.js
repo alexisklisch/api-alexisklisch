@@ -10,7 +10,7 @@ const router = Router()
 // Create new
 router.post('/',
   passport.authenticate('jwt', { session: false }),
-  checkRoles(['admin']),
+  /* checkRoles(['admin']), */
   validatorHandler(createNewSchema, 'body'),
   async (req, res, next) => {
     try {
@@ -22,14 +22,16 @@ router.post('/',
   })
 
 // Read new
-router.get('/', async (req, res, next) => {
-  try {
-    const rta = await newsService.getNews()
-    res.json(rta)
-  } catch (err) {
-    next(err)
-  }
-})
+router.get('/',
+  passport.authenticate('jwt', { session: false }),
+  async (req, res, next) => {
+    try {
+      const rta = await newsService.getNews()
+      res.json(rta)
+    } catch (err) {
+      next(err)
+    }
+  })
 
 // Read new by PK
 router.get('/:id', async (req, res, next) => {

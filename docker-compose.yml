@@ -1,17 +1,18 @@
 services:
   db:
-    image: mysql
+    image: postgres
     ports:
-      - 3306:3306
+      - 5432:5432
     environment:
-      - MYSQL_ROOT_PASSWORD=pass
-      - MYSQL_DATABASE=aklisch_dev
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_USER=aklisch
+      - POSTGRES_DB=aklisch_dev
     volumes:
-      - ./temp/mysql_data:/var/lib/mysql
+      - ./temp/postgres_data:/var/lib/postgresql/data
   admin:
-    image: phpmyadmin
+    image: dpage/pgadmin4
     ports:
       - 8080:80
     environment:
-    - MYSQL_ROOT_PASSWORD=pass
-    - MYSQL_PASSWORD=test
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
