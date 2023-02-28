@@ -1,3 +1,4 @@
+const boom = require('@hapi/boom')
 const { models } = require('../libs/sequelize.js')
 
 class NewsService {
@@ -17,9 +18,10 @@ class NewsService {
   }
 
   // Update new
-  async updateNew (id, data) {
-    console.log(data)
+  async updateNew (id, data, idFromToken) {
     const currentNew = await models.News.findByPk(id)
+    console.log(currentNew.dataValues.id, idFromToken)
+    if (currentNew.dataValues.usersId !== idFromToken) throw boom.unauthorized('No tienes acceso a esa cuenta')
     const rta = await currentNew.update(data, { include: ['users'] })
     return rta
   }

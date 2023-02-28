@@ -2,7 +2,7 @@ const { Router } = require('express')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const { serialize } = require('cookie')
-const { env, superSecret } = require('../../../config.js')
+const { superSecret } = require('../../../config.js')
 const router = Router()
 
 // Login
@@ -21,7 +21,7 @@ router.post('/login',
 
       const serialized = serialize('loginToken', token, {
         httpOnly: true,
-        secure: env === 'production',
+        secure: true,
         sameSite: 'none',
         maxAge: 1000 * 60 * 5,
         path: '/'

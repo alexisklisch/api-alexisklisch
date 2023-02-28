@@ -147,3 +147,4 @@ temp/
 docker-compose.yml
 pnpm-lock.yaml
 vercel.json
+ssl/

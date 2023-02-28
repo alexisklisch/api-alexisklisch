@@ -7,6 +7,7 @@ const routerApi = app => {
   const routerV1 = Router()
 
   app.use('/v1', routerV1)
+
   routerV1.use('/users', usersRoute)
   routerV1.use('/news', newsRoute)
   routerV1.use('/auth', authRoute)

@@ -15,10 +15,11 @@ const getNewByPKSchema = Joi.object({
 })
 
 const updateNewSchema = Joi.object({
+  title: string(64),
   username: string(64),
   body: string(128),
   link: string(64).hostname(),
-  usersId: integer.required()
+  usersId: integer
 })
 
 module.exports = { createNewSchema, getNewByPKSchema, updateNewSchema }
