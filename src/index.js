@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser')
 const { boomErrorHandler, logErrors, errorHandler } = require('./middlewares/error.handler.js')
 const { routerApi } = require('./router/index.router.js')
 const config = require('../config.js')
-const sslServer = require('../ssl/index.js')
+const sslServer = require('./utils/ssl-server.js')
 
 const app = express()
 app.use(cookieParser())
