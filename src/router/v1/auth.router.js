@@ -34,4 +34,15 @@ router.post('/login',
     }
   })
 
+// Email recovery
+router.post('/recovery',
+  passport.authenticate('local', { session: false }),
+  async (req, res, next) => {
+    try {
+      const { email } = req.body  
+    } catch (err) {
+      next(err)
+    }
+  })
+
 module.exports = router

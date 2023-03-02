@@ -14,7 +14,9 @@ router.post('/',
   validatorHandler(createNewSchema, 'body'),
   async (req, res, next) => {
     try {
-      const rta = await newsService.createNew(req.body)
+      const newNew = req.body
+      newNew.usersId = req.user.sub
+      const rta = await newsService.createNew(newNew)
       res.json(rta)
     } catch (err) {
       next(err)
@@ -27,7 +29,6 @@ router.get('/',
   async (req, res, next) => {
     try {
       const rta = await newsService.getNews()
-      console.log('A VER -->', rta)
       res.json(rta)
     } catch (err) {
       next(err)

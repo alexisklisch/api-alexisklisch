@@ -34,7 +34,9 @@ class UsersService {
   async updateUser (id, data) {
     const currentUser = await models.Users.findByPk(id)
     if (currentUser === null) throw boom.notFound('El usuario no existe')
-    return await currentUser.update(data)
+    const updatedUser = await currentUser.update(data)
+    delete updatedUser.dataValues.password
+    return updatedUser
   }
 
   // Delete user

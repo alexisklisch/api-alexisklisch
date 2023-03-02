@@ -2,14 +2,20 @@ const boom = require('@hapi/boom')
 const { models } = require('../libs/sequelize.js')
 
 class NewsService {
-  // Create user
+  // Create new
   async createNew (data) {
     return await models.News.create(data)
   }
 
   // Get all news
   async getNews () {
-    return await models.News.findAll()
+    return await models.News.findAll({
+      include: {
+        model: models.Users,
+        as: 'users',
+        attributes: ['username']
+      }
+    })
   }
 
   // Get new by PK
