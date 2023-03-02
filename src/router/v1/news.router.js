@@ -23,10 +23,11 @@ router.post('/',
 
 // Read news
 router.get('/',
-  passport.authenticate('jwt', { session: false, failureRedirect: 'http://localhost:3000/v1/login', failWithError: true }),
+  passport.authenticate('jwt', { session: false }),
   async (req, res, next) => {
     try {
       const rta = await newsService.getNews()
+      console.log('A VER -->', rta)
       res.json(rta)
     } catch (err) {
       next(err)
