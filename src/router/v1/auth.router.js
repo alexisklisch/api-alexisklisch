@@ -1,9 +1,9 @@
 const { Router } = require('express')
 const passport = require('passport')
-const jwt = require('jsonwebtoken')
-const { serialize } = require('cookie')
-const { superSecret } = require('../../../config.js')
+const { AuthService } = require('../../services/Auth.service.js')
+
 const router = Router()
+const authService = new AuthService()
 
 // Login
 router.post('/login',
@@ -11,21 +11,7 @@ router.post('/login',
   async (req, res, next) => {
     try {
       const { user } = req
-      const payload = {
-        // After math function... Secs, Mins, Hours, Days
-        exp: Math.floor(Date.now() / 1000) + 60 * 5, // 5 minutes
-        sub: user.id,
-        role: user.role
-      }
-      const token = jwt.sign(payload, superSecret)
-
-      const serialized = serialize('loginToken', token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'none',
-        maxAge: 1000 * 60 * 5,
-        path: '/'
-      })
+      const serialized = await authService.signToken(user)
 
       res.setHeader('Set-Cookie', serialized)
       res.json('Login Succesfully')
@@ -36,10 +22,12 @@ router.post('/login',
 
 // Email recovery
 router.post('/recovery',
-  passport.authenticate('local', { session: false }),
   async (req, res, next) => {
     try {
-      const { email } = req.body  
+      const { email } = req.body
+      const rta = await authService.sendEmail(email)
+
+      res.json(rta)
     } catch (err) {
       next(err)
     }
