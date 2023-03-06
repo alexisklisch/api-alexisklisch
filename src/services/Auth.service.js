@@ -25,7 +25,7 @@ class AuthService {
   async signToken (user) {
     const payload = {
       // After math function... Secs, Mins, Hours, Days
-      exp: Math.floor(Date.now() / 1000) + 60 * 5, // 5 minutes
+      exp: Math.floor(Date.now() / 1000) + 60 * 60, // 5 minutes
       sub: user.id,
       role: user.role
     }
@@ -35,7 +35,7 @@ class AuthService {
       httpOnly: true,
       secure: true,
       sameSite: 'none',
-      maxAge: 1000 * 60 * 5,
+      maxAge: 1000 * 60 * 60,
       path: '/'
     })
 
