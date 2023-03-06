@@ -49,10 +49,8 @@ class Users extends Model {
           user.password = cryptPassword
         },
         beforeUpdate: async (user, options) => {
-          if (user.password) {
-            const cryptPassword = await bcrypt.hash(user.password, 10)
-            user.password = cryptPassword
-          }
+          const cryptPassword = await bcrypt.hash(user.password, 10)
+          user.password = cryptPassword
         }
       }
     }
